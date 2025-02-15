@@ -48,10 +48,11 @@ export class ProductService {
     data: Prisma.ProductUpdateInput;
   }): Promise<Product> {
     const { data, where } = params;
-    return await this.prisma.product.update({
-      data,
+    const product = await this.prisma.product.update({
       where,
+      data,
     });
+    return product;
   }
 
   async deleteProduct(where: Prisma.ProductWhereUniqueInput): Promise<Product> {

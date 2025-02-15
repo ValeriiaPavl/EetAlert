@@ -96,19 +96,22 @@ export class AppController {
 
   @Put('change/:product_id')
   async changeProduct(
-    @Param('id') id: string,
+    @Param('product_id') id: string,
+    @Body()
     productData: {
-      productName: string;
-      problemDescription: string;
-      identificationMarks: string;
-      productImage: string;
-      shopName: string;
-      linkInfo: string;
+      productName?: string;
+      problemDescription?: string;
+      identificationMarks?: string;
+      productImage?: string;
+      shopName?: string;
+      linkInfo?: string;
     },
   ): Promise<ProductModel> {
-    return this.productService.updateProduct({
+    console.log(id);
+    const updatedProduct = await this.productService.updateProduct({
       where: { id: Number(id) },
       data: productData,
     });
+    return updatedProduct;
   }
 }
